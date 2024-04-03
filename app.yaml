@@ -1,9 +1,7 @@
-app.yaml
-
 runtime: nodejs20
 
-env_variables:
-  REACT_APP_API_URL: "https://stock-search-server-tkztfas4gq-uc.a.run.app"
+# env_variables:
+#   REACT_APP_API_URL: "https://stock-search-server-tkztfas4gq-uc.a.run.app"
 
 handlers:
   # Serve all static files with url ending with a file extension
