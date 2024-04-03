@@ -6,6 +6,7 @@ import {
   AiFillInstagram,
 } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
 
 function Footer() {
   let date = new Date();
@@ -30,7 +31,7 @@ function Footer() {
                 <AiFillGithub />
               </a>
             </li> */}
-            <li className="social-icons">
+            {/* <li className="social-icons">
               <a
                 href="/"
                 style={{ color: "white" }}
@@ -49,10 +50,24 @@ function Footer() {
               >
                 <FaLinkedinIn />
               </a>
+            </li> */}
+            <li className="social-icon footer-contact">
+              <span className="text-white">Contact me: </span>
+            </li>
+            
+            <li className="social-icons">
+              <a
+                href="mailto:liz7903@connect.hku.hk"
+                style={{ color: "white" }}
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <IoMdMail />
+              </a>
             </li>
             <li className="social-icons">
               <a
-                href="/"
+                href="https://www.instagram.com/summerboppin/"
                 style={{ color: "white" }}
                 target="_blank" 
                 rel="noopener noreferrer"
