@@ -14,7 +14,7 @@ RUN npm install
 COPY . /app
 
 # Make sure 8080 is what your app listen in app.js
-EXPOSE 8081
+# EXPOSE 8081
 
 # 启动Express服务器
 CMD ["npm", "start"]
