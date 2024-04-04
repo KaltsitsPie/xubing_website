@@ -639,7 +639,11 @@ button:focus {
 
 .markdown-container {
   text-align: left !important;
-  height: 600px !important;
+  min-height: 600px !important;
+}
+
+.markdown-container img {
+  max-width: 100%;
 }
 
 .markdown-content {
