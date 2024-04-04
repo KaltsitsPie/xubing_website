@@ -4,12 +4,16 @@ import { apiLoadMarkdown, apiGetFiles } from "../../api";
 import "./About.css";
 // import Github from "./Github";
 // import ReactMarkdown from 'react-markdown';
+// import ReactMarkdown from 'react-markdown';
+import MarkdownRenderer from "./MarkdownRenderer";
 
 function About() {
   const [expanded, setExpanded] = useState(false);
   const markdownFiles = useRef([]);
   const [selectedFileName, setSelectedFileName] = useState("");
+  // 被选择的markdown 内容
   const [selectedMarkdown, setSelectedMarkdown] = useState("");
+  // 被选择的markdown url
   const [selectedFileUrl, setSelectedFileUrl ] = useState("");
   const [fileIsLoaded, setFileIsLoaded] = useState(false);
 
@@ -36,6 +40,13 @@ function About() {
       
     });
   }, []);
+
+  useEffect(() => {
+    apiLoadMarkdown(selectedFileUrl).then((data) => {
+      console.log("获得了markdown文件", data);
+      setSelectedMarkdown(data);
+    });
+  }, [selectedFileUrl]);
 
   return (
     <Container fluid className="about-section">
@@ -80,8 +91,11 @@ function About() {
               </Navbar.Collapse>
             </Navbar>
           </Col>
-          <Col  xs={12} sm={12} md={9} lg={9} style={{height: "600px"}} className="">
-            <Tab.Content className="bg-success">{selectedFileUrl}</Tab.Content>
+          <Col  xs={12} sm={12} md={9} lg={9} className="">
+            <Tab.Content className="markdown-content">
+            <MarkdownRenderer markdown={selectedMarkdown} style={{ textAlign: 'left' }}/>
+              {/* {selectedFileUrl} */}
+              </Tab.Content>
           </Col>
         </Row>
       </Tab.Container>

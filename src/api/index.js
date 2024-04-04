@@ -10,11 +10,10 @@ export async function apiGetFiles() {
         const response = await axios.get("/get-files");
         let data = response.data;
         data = data.filter(item => item.name.endsWith("-xubing.md"));
-        // TODO.zyc 记得删
-        return data.slice(0,3);
+        return data;
     } catch (error) {
         console.error("Failed to apiGetFiles", error);
-        return "# ERROR";
+        return "# Loading...";
       }
 }
 
@@ -25,6 +24,6 @@ export async function apiLoadMarkdown(url) {
     return response.data;
   } catch (error) {
     console.error("Failed to apiLoadMarkdown", error);
-    return "# ERROR";
+    return "# Loading...";
   }
 }

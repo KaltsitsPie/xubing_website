@@ -636,6 +636,16 @@ button:focus {
   position: relative !important;
   /* height: 500px !important; */
 }
+
+.markdown-container {
+  text-align: left !important;
+  height: 600px !important;
+}
+
+.markdown-content {
+  background-color: rgba(9, 5, 29, 0.171);
+}
+
 /* --------- */
 /* Resume */
 /* --------- */
