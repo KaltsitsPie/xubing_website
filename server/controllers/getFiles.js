@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const finnhubKey = "cnarddhr01ql0f8afcf0cnarddhr01ql0f8afcfg";
-const finnhubKey2 = "co2ms79r01qp2sim3v60co2ms79r01qp2sim3v6g";
-const polygonKey = "q3e0Rj8gdrA6x0yJTrDpJL8hQ1WbrNdL";
-const polygonKey2 = "dwMSoQY5b3oPY_xyo7QOLg5kR5U5jmHI";
+const repositoryUrl = "https://api.github.com/repos/KaltsitsPie/personal-site-files/contents/";
 
 const getAutoComplete = async (req, res) => {
   const symbol = req.query.symbol;
@@ -17,6 +15,17 @@ const getAutoComplete = async (req, res) => {
   }
 };
 
+const getFiles = async (req, res) => {
+    try {
+        const response = await axios.get(repositoryUrl);
+        res.json(response.data);
+    } catch (err) {
+        res.status(500).json({ error: err.toString() });
+    }
+
+};
+
 export {
-  getAutoComplete
+  getAutoComplete,
+  getFiles
 };

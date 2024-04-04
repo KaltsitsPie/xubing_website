@@ -18,7 +18,11 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "react-tsparticles": "^1.42.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "path": "^0.12.7",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "react-markdown": "^4.3.1"
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
@@ -43,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "raw-loader": "^4.0.2"
   }
 }

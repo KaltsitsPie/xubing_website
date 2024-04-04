@@ -1,57 +1,92 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Particle from "../Particle";
+import React, { useEffect, useRef, useState } from "react";
+import { Container, Row, Col, Nav, Navbar, Tab } from "react-bootstrap";
+import { apiLoadMarkdown, apiGetFiles } from "../../api";
+import "./About.css";
 // import Github from "./Github";
-import Techstack from "./Techstack";
-import Aboutcard from "./AboutCard";
-import laptopImg from "../../Assets/about.png";
-import Toolstack from "./Toolstack";
+// import ReactMarkdown from 'react-markdown';
 
 function About() {
+  const [expanded, setExpanded] = useState(false);
+  const markdownFiles = useRef([]);
+  const [selectedFileName, setSelectedFileName] = useState("");
+  const [selectedMarkdown, setSelectedMarkdown] = useState("");
+  const [selectedFileUrl, setSelectedFileUrl ] = useState("");
+  const [fileIsLoaded, setFileIsLoaded] = useState(false);
+
+  const changeSelectedUrl = (url) => {
+    console.log("此时应该被render的url：", url);
+    setSelectedFileUrl(url);
+  };
+
+  const constructTabName = (name) => {
+    let filename = name;
+    return filename.replace(/-.*/, "");
+  };
+
+  useEffect(() => {
+    console.log("--开始fetch files");
+    apiGetFiles().then((data) => {
+      console.log("api get files: ", data);
+      if (data !== undefined && data.length > 0) {
+        markdownFiles.current = data;
+        setSelectedFileUrl(data[0].url);
+        setFileIsLoaded(true);
+        console.log("markdown files: ", markdownFiles.current);
+      }
+      
+    });
+  }, []);
+
   return (
     <Container fluid className="about-section">
-      {/* <Particle /> */}
-      <Container>
+      <Tab.Container id="left-tabs-example" >
+        <Row>
 
-        
-
-        {/* <Row style={{ justifyContent: "center", padding: "10px" }}>
-          <Col
-            md={7}
-            style={{
-              justifyContent: "center",
-              paddingTop: "30px",
-              paddingBottom: "50px",
-            }}
-          >
-            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-              施工中。。。
-            </h1>
-            总之这里是标题们
-            <Aboutcard />
-            <div style={{ height: "500px"}}></div>
+              {/* d-sm-none */}
+          <Col xs={12} sm={12} md={3} lg={3} className="bg-transparent">
+            <Navbar collapseOnSelect expand="lg" bg="light" expanded={expanded} className="bg-transparent about-nav-bar bg-info">
+              <Navbar.Toggle
+                aria-controls="responsive-navbar-nav"
+                onClick={() => {
+                  setExpanded(expanded ? false : true);
+                }}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </Navbar.Toggle>
+              <Navbar.Collapse id="responsive-navbar-nav">
+              {fileIsLoaded && (
+              <Nav variant="underline" className="flex-column ">
+              {/* ...所有选项... */}
+              {markdownFiles.current.map((file, index) => (
+               
+                <Nav.Item
+                  className="flex-grow-1 m-0 p-0"
+                  onClick={() => changeSelectedUrl(file.url)}
+                  key={file.name}
+                >
+                  <Nav.Link
+                    className="result-nav-link text-white text-center about-nav-link"
+                    eventKey={constructTabName(file.name)}
+                  >
+                    {constructTabName(file.name)}
+                    
+                 </Nav.Link>
+                </Nav.Item>
+              ))}
+            </Nav>
+            )}
+              </Navbar.Collapse>
+            </Navbar>
           </Col>
-          <Col
-            md={5}
-            style={{ paddingTop: "120px", paddingBottom: "50px" }}
-            className="about-img"
-          >
-            这里是内容
+          <Col  xs={12} sm={12} md={9} lg={9} style={{height: "600px"}} className="">
+            <Tab.Content className="bg-success">{selectedFileUrl}</Tab.Content>
           </Col>
         </Row>
-        <h1 className="project-heading">
-          Professional <strong className="purple">Skillset </strong>
-        </h1> 
+      </Tab.Container>
 
-        <Techstack />
-
-        <h1 className="project-heading">
-          <strong className="purple">Tools</strong> I use
-        </h1>
-        <Toolstack />
-
-        <Github /> */}
-      </Container>
+      
     </Container>
   );
 }

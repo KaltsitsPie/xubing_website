@@ -539,7 +539,6 @@ button:focus {
 .btn-primary {
   color: #fff !important;
   border: white 1.5px solid;
-  min-width: 80px !important;
   
 }
 
@@ -632,6 +631,11 @@ button:focus {
     padding-top: 0 !important;
   }
 }
+
+.about-nav-bar {
+  position: relative !important;
+  /* height: 500px !important; */
+}
 /* --------- */
 /* Resume */
 /* --------- */
@@ -660,6 +664,10 @@ button:focus {
 
 .resume-right {
   padding-left: 80px !important;
+}
+
+.resume-btn {
+  min-width: 80px !important;
 }
 
 @media (max-width: 767px) {
@@ -779,3 +787,4 @@ button:focus {
 .fork-btn-inner::after {
   display: none !important;
 }
+
